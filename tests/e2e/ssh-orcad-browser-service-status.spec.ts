@@ -85,6 +85,23 @@ test('an unavailable browser on a responding managed host does not report a serv
         { timeout: 30_000 }
       )
       .toEqual([])
+    await page.evaluate((worktreeId) => {
+      const diag: string[] = []
+      document.body.dataset.diagTabs = '[]'
+      let seen = new Set<string>()
+      window.__store!.subscribe((s) => {
+        const ids = (s.tabsByWorktree[worktreeId] ?? []).map((t) => t.id)
+        for (const id of ids) {
+          if (!seen.has(id)) {
+            diag.push(
+              `${Date.now()} ${id} host=${s.activeWorkspaceExecutionHostId} ${new Error('diag').stack}`
+            )
+            document.body.dataset.diagTabs = JSON.stringify(diag)
+          }
+        }
+        seen = new Set(ids)
+      })
+    }, remote.worktreeId)
     cpSync(TEMPLATE!, template, { recursive: true })
     const server = await reconnect(page, remote.targetId)
     console.log('[browser-conversion-connect]', server)
@@ -144,6 +161,11 @@ test('an unavailable browser on a responding managed host does not report a serv
     const notice = page.getByTestId('remote-browser-stream-error')
     await expect(notice).toBeVisible({ timeout: 30_000 })
     await page.screenshot({ path: testInfo.outputPath('browser-service-status.png') })
+    console.log(
+      '[diag-tabs]',
+      Date.now(),
+      await page.evaluate(() => document.body.dataset.diagTabs)
+    )
     console.log('[browser-service-notice]', await notice.innerText())
     const browserReply = await page.evaluate(
       (environmentId) =>
