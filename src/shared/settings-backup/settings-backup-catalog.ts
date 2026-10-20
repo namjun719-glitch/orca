@@ -254,6 +254,8 @@ export const SETTINGS_BACKUP_KEY_CLASSES = {
   aiVaultSearch: 'protected',
   telemetry: 'protected',
   nativeChatPermissionMode: 'protected',
+  agentNativeChatPermissionModes: 'protected',
+  nodeDistMirrorUrl: 'protected',
 
   // Internal: one-shot migration guards, kill switches, local ids and dismissed prompts
   machineName: 'internal',

@@ -300,7 +300,7 @@ vi.mock('../filesystem', () => ({
   registerFilesystemHandlers: registerFilesystemHandlersMock
 }))
 
-vi.mock('../filesystem-watcher', () => ({
+vi.mock('../filesystem-watcher-handlers', () => ({
   registerFilesystemWatcherHandlers: registerFilesystemWatcherHandlersMock
 }))
 
@@ -571,6 +571,7 @@ describe('registerCoreHandlers', () => {
       museUsage
     })
     expect(registerAppHandlersMock).toHaveBeenCalledWith(store, {
+      quitResumeRecordsFor: expect.any(Function),
       onBeforeRelaunch,
       onBeforeRelaunchExit: expect.any(Function)
     })
@@ -643,7 +644,9 @@ describe('registerCoreHandlers', () => {
     expect(registerCliHandlersMock).toHaveBeenCalled()
     expect(registerPreflightHandlersMock).toHaveBeenCalled()
     expect(registerShellHandlersMock).toHaveBeenCalledWith(store)
-    expect(registerClipboardHandlersMock).toHaveBeenCalledWith(store)
+    expect(registerClipboardHandlersMock).toHaveBeenCalledWith(store, {
+      localChatAttachmentStore: expect.any(Function)
+    })
     expect(registerUpdaterHandlersMock).toHaveBeenCalled()
     expect(setTrustedBrowserRendererWebContentsIdMock).toHaveBeenCalledWith(null)
     expect(setTrustedClipboardRendererWebContentsIdMock).toHaveBeenCalledWith(null)

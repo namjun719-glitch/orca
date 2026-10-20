@@ -6,7 +6,9 @@ vi.mock('../../ssh/remote-exec/remote-exec-command', async (importOriginal) => (
   ...(await importOriginal<typeof ExecCommandModule>()),
   execCommand: vi.fn()
 }))
-vi.mock('../../ssh/ssh-connection-utils', () => ({ shellEscape: (s: string) => `'${s}'` }))
+vi.mock('../../../shared/shell-argument-quoting', () => ({
+  quotePosixShell: (s: string) => `'${s}'`
+}))
 vi.mock('../install/remote-install-lock', async (importOriginal) => ({
   ...(await importOriginal<typeof InstallLock>()),
   acquireInstallLock: vi.fn()
@@ -18,10 +20,8 @@ import { wakeStoppedManagedOrcad } from './orcad-managed-wake'
 import { getRemoteHostPlatform } from '../../ssh/ssh-remote-platform'
 import type { OrcadHostTransport } from '../../ssh/orcad-host-transport'
 import { FakeOrcadHost, OLD } from '../activation/orcad-activation-host-test-harness'
-import {
-  ORCAD_E2E_IDLE_TIMEOUT_ENV,
-  ORCAD_MANAGED_ACTIVATION_ROOT_ENV
-} from '../../../shared/orcad-idle-exit'
+import { ORCAD_E2E_IDLE_TIMEOUT_ENV } from '../../../shared/orcad-idle-exit'
+import { ORCAD_MANAGED_ACTIVATION_ROOT_ENV } from '../../../shared/orcad-managed-launch-env'
 
 let host = new FakeOrcadHost()
 
