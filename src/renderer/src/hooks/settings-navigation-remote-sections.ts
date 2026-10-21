@@ -65,8 +65,7 @@ export function buildRemoteSettingsSections(
         : 'Run Orca on another machine and work on it from here.',
       icon: Server,
       searchEntries: [runtimeEnvironmentsSearchEntry],
-      group: 'remote',
-      badge: translate('auto.hooks.useSettingsNavigationMetadata.40d80bad8a', 'Beta')
+      group: 'remote'
     },
     ...(showDesktopOnlySettings && isMac
       ? [
