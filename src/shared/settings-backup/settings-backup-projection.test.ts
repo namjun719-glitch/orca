@@ -69,17 +69,21 @@ describe('projectSettingsForBackup', () => {
     expect(JSON.stringify(settings)).not.toContain('session=abc')
   })
 
-  it('never exports agent chat permission modes or the Node download mirror', () => {
+  it('never exports agent permission grants or the Node download mirror', () => {
     const { settings } = projectSettingsForBackup(
       settingsWith({
         nativeChatPermissionMode: 'full-access',
         agentNativeChatPermissionModes: { claude: 'full-access' },
+        agentPermissionOverrides: {},
+        experimentalConnectors: true,
         nodeDistMirrorUrl: 'https://mirror.example.com/dist/'
       }),
       SETTINGS_BACKUP_SECTIONS
     )
     expect(settings.nativeChatPermissionMode).toBeUndefined()
     expect(settings.agentNativeChatPermissionModes).toBeUndefined()
+    expect(settings.agentPermissionOverrides).toBeUndefined()
+    expect(settings.experimentalConnectors).toBeUndefined()
     expect(settings.nodeDistMirrorUrl).toBeUndefined()
   })
 

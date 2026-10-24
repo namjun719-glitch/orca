@@ -16,7 +16,7 @@ import type {
 
 export type SettingsApi = {
   get: () => Promise<GlobalSettings>
-  /** Synchronous persisted-settings read for startup decisions that can't wait for async hydration. Blocking IPC — call sparingly. */
+  /** Blocking IPC for startup decisions that cannot wait for hydration; call sparingly. */
   getSync: () => GlobalSettings | null
   set: (args: Partial<GlobalSettings>) => Promise<GlobalSettings>
   setActiveRuntimeEnvironmentPreference: (args: {
@@ -34,7 +34,6 @@ export type SettingsApi = {
   applyBackupImport: (request: SettingsBackupApplyRequest) => Promise<SettingsBackupApplyResult>
   listRecoveryPoints: () => Promise<SettingsRecoveryPointSummary[]>
   restoreRecoveryPoint: (id: string) => Promise<SettingsRecoveryRestoreResult>
-  /** Subscribe to out-of-band settings updates (e.g. View > Appearance toggles) to stay in sync with main. */
   onChanged: (callback: (updates: Partial<GlobalSettings>) => void) => () => void
 }
 

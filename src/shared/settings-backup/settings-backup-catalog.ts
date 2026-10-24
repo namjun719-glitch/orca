@@ -161,6 +161,8 @@ export const SETTINGS_BACKUP_KEY_CLASSES = {
   zcodePlanSite: 'agents',
 
   // Browser
+  openLinksInAppInBackground: 'browser',
+  browserProfileScope: 'browser',
   openLinksInApp: 'browser',
   openLinksInAppModifierInverts: 'browser',
   localhostWorktreeLabelsEnabled: 'browser',
@@ -256,6 +258,9 @@ export const SETTINGS_BACKUP_KEY_CLASSES = {
   nativeChatPermissionMode: 'protected',
   agentNativeChatPermissionModes: 'protected',
   nodeDistMirrorUrl: 'protected',
+  agentPermissionDefault: 'protected',
+  agentPermissionOverrides: 'protected',
+  experimentalConnectors: 'protected',
 
   // Internal: one-shot migration guards, kill switches, local ids and dismissed prompts
   machineName: 'internal',
@@ -299,6 +304,7 @@ export const SETTINGS_BACKUP_KEY_CLASSES = {
   claudeAgentTeamsDefaultDisabledMigrated: 'internal',
   visibleTaskProvidersDefaultedForJira: 'internal',
   agentYoloDefaultsMigrated: 'internal',
+  uiLanguagePortugueseMigrationApplied: 'internal',
   sshRemoteCliControlExistingHostsMigrated: 'internal',
   newWorkspaceSetupOnly: 'internal',
   terminalMacOptionAsAltMigrated: 'internal',

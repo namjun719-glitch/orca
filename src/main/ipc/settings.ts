@@ -54,11 +54,7 @@ export function registerSettingsHandlers(
     }
   )
 
-  // Why: terminal panes can bind PTYs before async settings hydration
-  // completes. The side-effect authority kill switch is consulted once at
-  // transport creation, so the renderer needs the persisted value
-  // synchronously or pre-hydration bindings would always pick main authority
-  // (terminal-side-effect-authority.md, migration switch).
+  // PTYs can bind before hydration; transport authority selection needs persisted settings synchronously.
   ipcMain.on('settings:get-sync', (event) => {
     event.returnValue = readSettingsWithRuntimeEnvironmentPreference(store, app.getPath('userData'))
   })
