@@ -73,7 +73,7 @@ describe('projectSettingsForBackup', () => {
     const { settings } = projectSettingsForBackup(
       settingsWith({
         nativeChatPermissionMode: 'full-access',
-        agentNativeChatPermissionModes: { claude: 'full-access' },
+        orchestrationChatErrorEscalationEnabled: false,
         agentPermissionOverrides: {},
         experimentalConnectors: true,
         nodeDistMirrorUrl: 'https://mirror.example.com/dist/'
@@ -81,7 +81,7 @@ describe('projectSettingsForBackup', () => {
       SETTINGS_BACKUP_SECTIONS
     )
     expect(settings.nativeChatPermissionMode).toBeUndefined()
-    expect(settings.agentNativeChatPermissionModes).toBeUndefined()
+    expect(settings.orchestrationChatErrorEscalationEnabled).toBeUndefined()
     expect(settings.agentPermissionOverrides).toBeUndefined()
     expect(settings.experimentalConnectors).toBeUndefined()
     expect(settings.nodeDistMirrorUrl).toBeUndefined()
