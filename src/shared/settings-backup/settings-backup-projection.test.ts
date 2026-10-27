@@ -74,6 +74,7 @@ describe('projectSettingsForBackup', () => {
       settingsWith({
         nativeChatPermissionMode: 'full-access',
         orchestrationChatErrorEscalationEnabled: false,
+        orchestrationHeartbeatsEnabled: false,
         agentPermissionOverrides: {},
         experimentalConnectors: true,
         nodeDistMirrorUrl: 'https://mirror.example.com/dist/'
@@ -82,6 +83,7 @@ describe('projectSettingsForBackup', () => {
     )
     expect(settings.nativeChatPermissionMode).toBeUndefined()
     expect(settings.orchestrationChatErrorEscalationEnabled).toBeUndefined()
+    expect(settings.orchestrationHeartbeatsEnabled).toBeUndefined()
     expect(settings.agentPermissionOverrides).toBeUndefined()
     expect(settings.experimentalConnectors).toBeUndefined()
     expect(settings.nodeDistMirrorUrl).toBeUndefined()

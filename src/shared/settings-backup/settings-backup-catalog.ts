@@ -255,6 +255,8 @@ export const SETTINGS_BACKUP_KEY_CLASSES = {
   agentSkillSharingEnabled: 'protected',
   nestedWorkerMaxDepth: 'protected',
   orchestrationChatErrorEscalationEnabled: 'protected',
+  orchestrationHeartbeatsEnabled: 'protected',
+  orchestrationHeartbeatIntervalMinutes: 'protected',
   aiVaultSearch: 'protected',
   telemetry: 'protected',
   nativeChatPermissionMode: 'protected',
